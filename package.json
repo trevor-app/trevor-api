@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "name": "trevor-api",
+  "version": "1.0.0",
+  "description": "Trevor API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trevor-app/trevor-api.git"
+  },
+  "author": "Simon Thiboutôt <salut@simonthiboutot.com> (http://simonthiboutot.com)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/trevor-app/trevor-api/issues"
+  },
+  "homepage": "https://github.com/trevor-app/trevor-api#readme",
+  "keywords": [
+    "Trevor",
+    "API"
+  ],
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
