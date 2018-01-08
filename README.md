@@ -21,6 +21,14 @@ Start server:
 npm start
 ```
 
+## test
+
+Run tests:
+
+```bash
+npm test
+```
+
 ## license
 
 GPL-3.0

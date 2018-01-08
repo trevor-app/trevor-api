@@ -3,10 +3,10 @@
   "name": "trevor-api",
   "version": "1.0.0",
   "description": "Trevor API",
-  "main": "index.js",
+  "main": "app/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "jasmine-node spec",
+    "start": "node app/index.js"
   },
   "repository": {
     "type": "git",
@@ -29,8 +29,11 @@
     "eslint": "^4.15.0",
     "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jasmine": "^2.9.1",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "jasmine-node": "^1.14.5",
+    "request": "^2.83.0"
   }
 }
