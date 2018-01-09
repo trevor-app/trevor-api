@@ -81,8 +81,8 @@ LastfmService.prototype.searchArtists = function (query) {
 
 LastfmService.prototype.search = function (query) {
   return Promise.all([
-    this.searchAlbum(query),
-    this.searchArtists(query)
+    this.searchArtists(query),
+    this.searchAlbum(query)
   ]).then(_.flatten)
 }
 
