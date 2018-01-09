@@ -1,4 +1,5 @@
 const LastfmService = require('./services/lastfm-service')
+const storesService = require('./services/stores-service')
 const _ = require('lodash')
 const cors = require('cors')
 const express = require('express')
@@ -56,6 +57,28 @@ app.get('/artists/:mbid/albums', (req, res) => {
   }
   lastfm.getArtistAlbums(mbid)
     .then((albums) => res.status(200).json(albums))
+    .catch((error) => {
+      return req(400).json({ error: error.message })
+    })
+})
+
+app.get('/stores', (req, res) => {
+  res.status(200).json(storesService.getNames())
+})
+
+app.get('/stores/:storeName/albums/:mbid/items', (req, res) => {
+  const storeName = req.params.storeName
+  const mbid = req.params.mbid
+  const store = storesService.getStoreByName(storeName)
+  if (_.isEmpty(mbid)) {
+    return req(400).json({ error: 'Required params `mbid`' })
+  }
+  if (_.isEmpty(store)) {
+    return req(400).json({ error: `Invalid store name '${storeName}'` })
+  }
+  lastfm.getAlbum(mbid)
+    .then((album) => store.search(album.artist, album.name))
+    .then((items) => res.status(200).json(items))
     .catch((error) => {
       return req(400).json({ error: error.message })
     })
