@@ -19,46 +19,46 @@ app.get('/', (req, res) => res.send('Trevor API'))
 app.get('/search', (req, res) => {
   const query = req.query.query
   if (_.isEmpty(query)) {
-    return req(400).json({ error: 'Required params `query`' })
+    return res.status(400).json({ error: 'Required params `query`' })
   }
   lastfm.search(query)
     .then((results) => res.status(200).json(results))
-    .catch((error) => res(400).json({ error }))
+    .catch((error) => res.status(400).json({ error }))
 })
 
 app.get('/albums/:mbid', (req, res) => {
   const mbid = req.params.mbid
   if (_.isEmpty(mbid)) {
-    return req(400).json({ error: 'Required params `mbid`' })
+    return res.status(400).json({ error: 'Required params `mbid`' })
   }
   lastfm.getAlbum(mbid)
     .then((album) => res.status(200).json(album))
     .catch((error) => {
-      return req(400).json({ error: error.message })
+      return res.status(400).json({ error: error.message })
     })
 })
 
 app.get('/artists/:mbid', (req, res) => {
   const mbid = req.params.mbid
   if (_.isEmpty(mbid)) {
-    return req(400).json({ error: 'Required params `mbid`' })
+    return res.status(400).json({ error: 'Required params `mbid`' })
   }
   lastfm.getArtist(mbid)
     .then((artist) => res.status(200).json(artist))
     .catch((error) => {
-      return req(400).json({ error: error.message })
+      return res.status(400).json({ error: error.message })
     })
 })
 
 app.get('/artists/:mbid/albums', (req, res) => {
   const mbid = req.params.mbid
   if (_.isEmpty(mbid)) {
-    return req(400).json({ error: 'Required params `mbid`' })
+    return res.status(400).json({ error: 'Required params `mbid`' })
   }
   lastfm.getArtistAlbums(mbid)
     .then((albums) => res.status(200).json(albums))
     .catch((error) => {
-      return req(400).json({ error: error.message })
+      return res.status(400).json({ error: error.message })
     })
 })
 
@@ -71,16 +71,18 @@ app.get('/stores/:storeName/albums/:mbid/items', (req, res) => {
   const mbid = req.params.mbid
   const store = storesService.getStoreByName(storeName)
   if (_.isEmpty(mbid)) {
-    return req(400).json({ error: 'Required params `mbid`' })
+    return res.status(400).json({ error: 'Required params `mbid`' })
   }
   if (_.isEmpty(store)) {
-    return req(400).json({ error: `Invalid store name '${storeName}'` })
+    return res.status(400).json({ error: `Invalid store name '${storeName}'` })
   }
   lastfm.getAlbum(mbid)
     .then((album) => store.search(album.artist, album.name))
-    .then((items) => res.status(200).json(items))
+    .then((items) => {
+      res.status(200).json(items)
+    })
     .catch((error) => {
-      return req(400).json({ error: error.message })
+      return res.status(400).json({ error: error.message })
     })
 })
 

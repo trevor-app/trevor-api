@@ -1,8 +1,10 @@
 const _ = require('lodash')
 const itunesStore = require('../stores/itunes-store.js')
+const amazonStore = require('../stores/amazon-store.js')
 
 const stores = [
-  itunesStore
+  itunesStore,
+  amazonStore
 ]
 
 function getNames () {

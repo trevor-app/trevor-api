@@ -20,7 +20,7 @@ function generateItem (result) {
   }
 }
 
-function search (artist, album, callback) {
+function search (artist, album) {
   artist = normalize(artist)
   album = normalize(album)
   const params = {
