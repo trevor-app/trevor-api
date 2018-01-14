@@ -82,6 +82,7 @@ app.get('/stores/:storeName/albums/:mbid/items', (req, res) => {
       res.status(200).json(items)
     })
     .catch((error) => {
+      console.error(JSON.stringify(error, null, 2))
       return res.status(400).json({ error: error.message })
     })
 })

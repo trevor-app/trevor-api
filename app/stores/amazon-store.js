@@ -3,6 +3,8 @@ const _ = require('lodash')
 const amazon = require('amazon-product-api')
 // const normalize = require('../services/normalize-service').normalize
 
+const ERROR_CODE_NO_EXACT_MATCHES = 'AWS.ECommerceService.NoExactMatches'
+
 const storeName = 'Amazon CA'
 const country = 'CA'
 
@@ -84,6 +86,11 @@ function search (artist, album) {
         if (isNewConditionOffer(result)) items.push(extractNewItem(result))
         return items
       }, [])
+    })
+    .catch(error => {
+      const code = _.get(error, '[0].Error[0].Code[0]')
+      if (code === ERROR_CODE_NO_EXACT_MATCHES) return []
+      throw error
     })
 }
 
