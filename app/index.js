@@ -26,6 +26,26 @@ app.get('/search', (req, res) => {
     .catch((error) => res.status(400).json({ error }))
 })
 
+app.get('/search/artists', (req, res) => {
+  const query = req.query.query
+  if (_.isEmpty(query)) {
+    return res.status(400).json({ error: 'Required params `query`' })
+  }
+  lastfm.searchArtists(query)
+    .then((results) => res.status(200).json(results))
+    .catch((error) => res.status(400).json({ error }))
+})
+
+app.get('/search/albums', (req, res) => {
+  const query = req.query.query
+  if (_.isEmpty(query)) {
+    return res.status(400).json({ error: 'Required params `query`' })
+  }
+  lastfm.searchAlbums(query)
+    .then((results) => res.status(200).json(results))
+    .catch((error) => res.status(400).json({ error }))
+})
+
 app.get('/albums/:mbid', (req, res) => {
   const mbid = req.params.mbid
   if (_.isEmpty(mbid)) {

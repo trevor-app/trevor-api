@@ -49,10 +49,10 @@ LastfmService.prototype.getArtistAlbums = function (mbidOrArtist) {
   })
 }
 
-LastfmService.prototype.searchAlbum = function (query) {
+LastfmService.prototype.searchAlbum = function (query, limit = 5) {
   return this.client.request('album.search', {
     album: query,
-    limit: 10
+    limit
   }).then((data) => {
     const albums = _.get(data, 'results.albummatches.album', [])
     return albums.map((album) => {
@@ -64,10 +64,10 @@ LastfmService.prototype.searchAlbum = function (query) {
   })
 }
 
-LastfmService.prototype.searchArtists = function (query) {
+LastfmService.prototype.searchArtists = function (query, limit = 5) {
   return this.client.request('artist.search', {
     artist: query,
-    limit: 10
+    limit
   }).then((data) => {
     const albums = _.get(data, 'results.artistmatches.artist', [])
     return albums.map((album) => {
