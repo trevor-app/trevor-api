@@ -75,6 +75,10 @@ function search (artistName, albumName) {
         albumUrls.map(albumUrl => getAlbumProducts(albumName, albumUrl))
       ).then(_.flatten)
     })
+    .catch(error => {
+      console.error(error)
+      return []
+    })
 }
 
 module.exports = new BaseStore(storeName, country, search)
