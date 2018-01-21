@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "amazon-product-api": "^0.4.4",
-    "bandcamp-scraper": "^1.2.2",
+    "bandcamp-scraper": "github:mastert/bandcamp-scraper#fix-issue-26",
     "cheerio": "^1.0.0-rc.2",
     "cors": "^2.8.4",
     "currency-symbol-mapper": "^4.0.0",
